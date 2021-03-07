@@ -16,7 +16,7 @@ urlpatterns = [
     # User management
     path("users/", include("covidtracker.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    path("tracker/", include("covidtracker.tracker.urls", namespace="tracker")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
