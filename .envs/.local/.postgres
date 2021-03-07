@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=covidcasetracker
+POSTGRES_USER=vRxvuAyurkRoGfcikJtoyEFisfsEQima
+POSTGRES_PASSWORD=btaZCew65lF8ugCNmAjRytzavTc40cnCOCMB7P0V2YNi8US2Y72yU1YgVOdl6cvw
