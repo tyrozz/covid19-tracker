@@ -10,12 +10,18 @@ class LocationViewSet(GenericViewSet, ListModelMixin):
     serializer_class = LocationSerializer
     queryset = Location.objects.all()
     filterset_fields = (
-        "country_id",
-        "slug",
+        "location_code",
         "country_code",
-        "country",
-        "province",
-        "county",
+        "slug",
+        "iso2",
+        "iso3",
+        "fibs",
+        "province_state",
+        "country_region",
+        "location_name",
+        "country_population",
+        "latitude",
+        "longitute",
     )
 
 
