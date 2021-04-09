@@ -31,9 +31,10 @@ class Location(models.Model):
         return self.location_name
 
     def save(self, *args, **kwargs):
-        value = self.location_name
-        self.slug = slugify(value, allow_unicode=False)
-        super().save(*args, **kwargs)
+        if not self.slug:
+            value = self.location_name
+            self.slug = slugify(value, allow_unicode=False)
+            super().save(*args, **kwargs)
 
 
 class TimeLine(models.Model):
@@ -45,7 +46,7 @@ class TimeLine(models.Model):
     recovered = JSONField(default=dict, blank=True, null=True)
 
     def __str__(self):
-        return self.location.slug
+        return self.location.location_name
 
 
 class Case(models.Model):
@@ -58,4 +59,4 @@ class Case(models.Model):
     recovered = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.location.country
+        return self.location.location_name
