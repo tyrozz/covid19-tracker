@@ -16,7 +16,6 @@ Tracking Covid Cases
 1. Create a virtualenv and activate it:
 ```shell
 virtualenv -p  python3.8 venv
-
 source venv/bin/activate
 ```
 
@@ -24,12 +23,14 @@ source venv/bin/activate
 ```shell
 pip install -r requirements/local.txt
 ```
+
 3. Create a new PostgreSQL database using createdb:
 ```shell
 createdb <database name> -U postgres --password <password>
 ```
+
 4. Set the environment variables:
-```shell
+ ```shell
 export DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/<DB name given to createdb>
 
 export CELERY_BROKER_URL=redis://localhost:6379/0
@@ -41,17 +42,18 @@ export USE_DOCKER=no
 ```shell
 python manage.py migrate
 ```
-6. Run the server
+
+6. Run the server:
 ```shell
 python manage.py runserver 0.0.0.0:8000
 ```
 
-7. Git
+7. Git commands
 ```shell
 git init
-
 pre-commit install
 ```
+
 ## Getting Up and Running Locally With Docker
 
 You should have Docker and Docker Compose installed in your system.
@@ -75,3 +77,20 @@ docker-compose -f local.yml run --rm django python manage.py migrate
 
 docker-compose -f local.yml run --rm django python manage.py createsuperuser
 ```
+## Field Description
+
+### Location
+
+- **location_code**: Unique code for each row entry.
+	For example Brussels-Belgium: 5602, East Flanders-Belgium: 5603
+- **country_code**: Unique code for each country
+	For example Belgium: 56
+- **iso2** and **iso3**: Country code identifiers
+- **fibs**:  Federal Information Processing Standards code, USA only.
+- **province_state**: Province/State
+- **country_region**: Country/Region
+- **location_name**: Country name and the location name together. For example Antwerp, Belgium
+- **slug**: Unique slug for each location. Generated with location_name if it is not provided.
+- **country_population**
+- **latitude**
+- **longitute**
