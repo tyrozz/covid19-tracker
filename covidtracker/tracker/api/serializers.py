@@ -6,7 +6,9 @@ from covidtracker.tracker.models import Case, Location, TimeLine
 class TimeLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeLine
-        fields = "__all__"
+        exclude = [
+            "id",
+        ]
 
 
 class CaseSerializer(serializers.ModelSerializer):

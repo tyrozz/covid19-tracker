@@ -1,27 +1,39 @@
 from django.db import models
 from django.db.models import JSONField
+from django.utils.text import slugify
 
 
 class Location(models.Model):
-    country_id = models.PositiveIntegerField()
+    location_code = models.PositiveIntegerField(
+        help_text="Unique code for each location. For example Brussels-Belgium:5602, East Flanders-Belgium:5603"
+    )
+    country_code = models.PositiveIntegerField(
+        help_text="Unique code for a country. For example Belgium:56"
+    )
+    iso2 = models.CharField(max_length=10, blank=True)
+    iso3 = models.CharField(max_length=10, blank=True)
+    fibs = models.CharField(max_length=10, blank=True)
+    province_state = models.CharField(max_length=255, blank=True)
+    country_region = models.CharField(max_length=255, blank=True)
+    location_name = models.CharField(
+        max_length=255, blank=True, help_text="For example Antwerp, Belgium"
+    )
     slug = models.SlugField(max_length=255, unique=True)
-    country_code = models.CharField(max_length=50)
-    country = models.CharField(max_length=255)
-    country_population = models.PositiveIntegerField()
-    province = models.CharField(max_length=255, blank=True, null=True)
-    county = models.CharField(max_length=255, blank=True, null=True)
+    country_population = models.PositiveIntegerField(blank=True)
+    latitude = models.DecimalField(
+        max_digits=22, decimal_places=16, blank=True, null=True
+    )
+    longitute = models.DecimalField(
+        max_digits=22, decimal_places=16, blank=True, null=True
+    )
 
     def __str__(self):
-        return self.country
+        return self.location_name
 
-
-class Coordinates(models.Model):
-    location = models.OneToOneField(Location, on_delete=models.CASCADE)
-    latitude = models.DecimalField(max_digits=22, decimal_places=16)
-    longitute = models.DecimalField(max_digits=22, decimal_places=16)
-
-    def __str__(self):
-        return f"{self.location} {self.latitude} {self.longitute}"
+    def save(self, *args, **kwargs):
+        value = self.location_name
+        self.slug = slugify(value, allow_unicode=False)
+        super().save(*args, **kwargs)
 
 
 class TimeLine(models.Model):
