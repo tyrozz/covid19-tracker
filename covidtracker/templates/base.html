@@ -68,6 +68,15 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/">API</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'tracker:location-upload' %}">Upload Location</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'tracker:case-upload' %}">Upload Case</a>
+            </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
