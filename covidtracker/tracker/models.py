@@ -21,10 +21,10 @@ class Location(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     country_population = models.PositiveIntegerField(blank=True)
     latitude = models.DecimalField(
-        max_digits=22, decimal_places=16, blank=True, null=True
+        max_digits=11, decimal_places=8, blank=True, null=True
     )
     longitute = models.DecimalField(
-        max_digits=22, decimal_places=16, blank=True, null=True
+        max_digits=11, decimal_places=8, blank=True, null=True
     )
 
     def __str__(self):
