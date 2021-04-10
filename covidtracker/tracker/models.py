@@ -69,9 +69,7 @@ class Case(models.Model):
     recovered = models.PositiveIntegerField()
 
     class Meta:
-        ordering = [
-            "id",
-        ]
+        ordering = ["-date", "id"]
 
     def __str__(self):
         return f"Cases in {self.location.location_name} in {self.date}"
@@ -135,9 +133,7 @@ class Vaccination(models.Model):
     )
 
     class Meta:
-        ordering = [
-            "id",
-        ]
+        ordering = ["-date", "id"]
 
     def __str__(self):
         return f"{self.people_vaccinated} people vaccinated in {self.location.location_name} as of {self.date}"
