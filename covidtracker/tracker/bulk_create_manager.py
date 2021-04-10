@@ -3,6 +3,7 @@ from collections import defaultdict
 from django.apps import apps
 
 
+# https://www.caktusgroup.com/blog/2019/01/09/django-bulk-inserts/
 class BulkCreateManager(object):
     """
     This helper class keeps track of ORM objects to be created for multiple
