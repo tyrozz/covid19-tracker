@@ -46,14 +46,6 @@ class Location(models.Model):
             self.slug = slugify(value, allow_unicode=False)
             super().save(*args, **kwargs)
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         # code = location_code if self.location_code else random.randint(100000000,999999999)
-    #         # name = " ".join([self.location_name, self.province_state,code])
-    #         # name_slug2 = slugify(name, allow_unicode=False)
-    #         self.slug = random.randint(100000000,999999999)
-    #         super().save(*args, **kwargs)
-
 
 class TimeLine(models.Model):
     location = models.ForeignKey(
