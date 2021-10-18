@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 from ...models import Location
 
+
 class Command(BaseCommand):
     help = "Load location data from CSV"
 
@@ -21,7 +22,7 @@ class Command(BaseCommand):
             locations = []
             for row in data:
                 location = Location(
-                    location_code=row[0],                    
+                    location_code=row[0],
                     iso2=row[1],
                     iso3=row[2],
                     country_code=row[3],
@@ -30,9 +31,9 @@ class Command(BaseCommand):
                     country_region=row[7],
                     latitude=row[8],
                     longitute=row[9],
-                    location_name=row[10],                    
+                    location_name=row[10],
                     country_population=float(row[11]),
-                    slug=slugify(row[10])            
+                    slug=slugify(row[10]),
                 )
                 locations.append(location)
                 if len(locations) > 5000:
@@ -46,6 +47,3 @@ class Command(BaseCommand):
                 f"Loading CSV took: {(end_time-start_time).total_seconds()} seconds."
             )
         )
-
-
-

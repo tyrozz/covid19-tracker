@@ -8,12 +8,12 @@ class Location(models.Model):
     location_code = models.IntegerField(
         help_text="Unique code for each location. For example Brussels-Belgium:5602, East Flanders-Belgium:5603",
         blank=True,
-        null=True
+        null=True,
     )
     country_code = models.IntegerField(
         help_text="Unique code for a country. For example Belgium:56",
         blank=True,
-        null=True
+        null=True,
     )
     iso2 = models.CharField(max_length=10, blank=True)
     iso3 = models.CharField(max_length=10, blank=True)
