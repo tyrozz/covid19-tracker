@@ -1,14 +1,19 @@
+import random
 from django.db import models
 from django.db.models import JSONField
 from django.utils.text import slugify
 
 
 class Location(models.Model):
-    location_code = models.PositiveIntegerField(
-        help_text="Unique code for each location. For example Brussels-Belgium:5602, East Flanders-Belgium:5603"
+    location_code = models.IntegerField(
+        help_text="Unique code for each location. For example Brussels-Belgium:5602, East Flanders-Belgium:5603",
+        blank=True,
+        null=True
     )
-    country_code = models.PositiveIntegerField(
-        help_text="Unique code for a country. For example Belgium:56"
+    country_code = models.IntegerField(
+        help_text="Unique code for a country. For example Belgium:56",
+        blank=True,
+        null=True
     )
     iso2 = models.CharField(max_length=10, blank=True)
     iso3 = models.CharField(max_length=10, blank=True)
@@ -19,7 +24,7 @@ class Location(models.Model):
         max_length=255, blank=True, help_text="For example Antwerp, Belgium"
     )
     slug = models.SlugField(max_length=255, unique=True)
-    country_population = models.PositiveIntegerField(blank=True)
+    country_population = models.IntegerField(blank=True, null=True)
     latitude = models.DecimalField(
         max_digits=11, decimal_places=8, blank=True, null=True
     )
@@ -37,9 +42,17 @@ class Location(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            value = self.location_name
+            value = self.location_code
             self.slug = slugify(value, allow_unicode=False)
             super().save(*args, **kwargs)
+
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         # code = location_code if self.location_code else random.randint(100000000,999999999)
+    #         # name = " ".join([self.location_name, self.province_state,code])
+    #         # name_slug2 = slugify(name, allow_unicode=False)
+    #         self.slug = random.randint(100000000,999999999)
+    #         super().save(*args, **kwargs)
 
 
 class TimeLine(models.Model):
