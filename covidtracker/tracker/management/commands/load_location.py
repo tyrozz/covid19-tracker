@@ -23,17 +23,17 @@ class Command(BaseCommand):
             for row in data:
                 location = Location(
                     location_code=row[0],
-                    iso2=row[1],
-                    iso3=row[2],
-                    country_code=row[3],
+                    country_code=row[1],
+                    iso2=row[2],
+                    iso3=row[3],
                     fibs=row[4],
-                    province_state=row[6],
-                    country_region=row[7],
-                    latitude=row[8],
-                    longitute=row[9],
-                    location_name=row[10],
-                    country_population=float(row[11]),
-                    slug=slugify(row[10]),
+                    province_state=row[5],
+                    country_region=row[6],
+                    location_name=row[7],
+                    slug=row[8],
+                    country_population=row[9],
+                    latitude=row[10],
+                    longitute=row[11],
                 )
                 locations.append(location)
                 if len(locations) > 5000:
